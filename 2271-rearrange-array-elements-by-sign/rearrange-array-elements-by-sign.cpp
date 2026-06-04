@@ -13,15 +13,17 @@ public:
                 neg.push_back(nums[i]);
             }
         }
-
-       for(int i=n-1;i>=0;i--){
+int p=0,q=0;
+       for(int i=0;i<n;i++){
         if(i%2==0){
-            nums[i]=pos.back();
-            pos.pop_back();
+            nums[i]=pos[p];
+            p++;
+            // pos.pop_back();
         }
         else{
-            nums[i]=neg.back();
-            neg.pop_back();
+            nums[i]=neg[q];
+            q++;
+            // neg.pop_back();
         }
        }
     return nums;}
