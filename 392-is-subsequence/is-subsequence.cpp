@@ -4,21 +4,29 @@ public:
         int n = s.size();
         int m = t.size();
 
-        int l = 0;
-        int r = 0;
+        map<char, vector<int>> mp;
 
-        while(l < n && r < m){
-            if(s[l] == t[r]){
-                l++;
-                r++;
-            }
-            else{
-                r++;
-            }
-            if(l == n){
-                return true;
-            }
+        for(int i = 0; i < m; i++){
+            mp[t[i]].push_back(i);
         }
-        return l==n;
+
+        int prev = -1;
+
+        for(int i = 0; i < n; i++){
+            char ch = s[i];
+
+            if(mp.find(ch) == mp.end()) 
+            return false;
+
+            vector<int> indices = mp[ch];
+            auto it = upper_bound(indices.begin(), indices.end(), prev);
+
+            if(it == indices.end())
+            return false;
+
+            prev = *it;
+
+        }
+        return true;       
     }
 };
