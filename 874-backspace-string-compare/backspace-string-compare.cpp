@@ -1,29 +1,52 @@
 class Solution {
 public:
     bool backspaceCompare(string s, string t) {
-        string s1 = "";
-        string s2 = "";
+        int n = s.size();
+        int m = t.size();
 
-        for(char &ch : s){
-            if(ch == '#'){
-                if(!s1.empty()){
-                    s1.pop_back();
+        int i = n-1;
+        int j = m-1;
+
+        int skip_s = 0;
+        int skip_t = 0;
+
+        while(i >= 0 || j >= 0){
+            while(i >= 0){
+                if(s[i] == '#'){
+                    skip_s++;
+                    i--;
+                }
+                else if(skip_s > 0){
+                    skip_s--;
+                    i--;
+                }
+                else{
+                    break;
                 }
             }
-            else{
-                s1.push_back(ch);
-            }
-        }
-        for(char &ch : t){
-            if(ch == '#'){
-                if(!s2.empty()){
-                    s2.pop_back();
+            while(j >= 0){
+                if(t[j] == '#'){
+                    skip_t++;
+                    j--;
+                }
+                else if(skip_t > 0){
+                    skip_t--;
+                    j--;
+                }
+                else{
+                    break;
                 }
             }
-            else{
-                s2.push_back(ch);
-            }
+            char first = i < 0 ? '$' : s[i];
+            char second = j < 0 ? '$' : t[j];
+
+            if(first != second)
+                return false;
+
+            i--;
+            j--;
+            
         }
-        return s1 == s2;
+        return true;
     }
 };
