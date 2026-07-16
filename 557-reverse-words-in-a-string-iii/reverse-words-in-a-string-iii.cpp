@@ -3,18 +3,18 @@ public:
     string reverseWords(string s) {
         int n = s.size();
 
-        stringstream ss(s);
+        stringstream ss(s); // tokonizing
 
-        string w;
+        string token = "";
         string ans = "";
 
-        while(ss >> w){
-          reverse(w.begin(), w.end());
-            ans += w;
-            ans += ' ';
+        while(ss >> token){
+            reverse(token.begin(), token.end());
+            ans += token + ' ';
+            
 
         }
-        ans.pop_back(); // trailing blank space
-        return ans;
+        // ans.pop_back(); // trailing blank space
+        return ans.substr(0, ans.size()-1);
     }
 };
