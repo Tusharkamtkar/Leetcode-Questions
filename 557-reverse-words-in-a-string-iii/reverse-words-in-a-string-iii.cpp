@@ -3,18 +3,20 @@ public:
     string reverseWords(string s) {
         int n = s.size();
 
-        stringstream ss(s); // tokonizing
+        for(int i = 0; i < n; i++){
 
-        string token = "";
-        string ans = "";
+            if(s[i] != ' '){
+                
+                int j = i;
 
-        while(ss >> token){
-            reverse(token.begin(), token.end());
-            ans += token + ' ';
-            
+                while(j < n && s[j] != ' '){
+                    j++;
+                }
+                reverse(s.begin() + i, s.begin() + j);
 
+                i = j;
+            }
         }
-        // ans.pop_back(); // trailing blank space
-        return ans.substr(0, ans.size()-1);
+        return s;
     }
 };
