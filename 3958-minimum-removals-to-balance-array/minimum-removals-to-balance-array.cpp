@@ -14,7 +14,7 @@ public:
             int maxEl = nums[j];
             int minEl = nums[i];
 
-            while(i < j && maxEl > (long long)k * minEl){
+            if(i < j && maxEl > (long long)k * minEl){
                 i++;
                 minEl = nums[i]; 
             }
