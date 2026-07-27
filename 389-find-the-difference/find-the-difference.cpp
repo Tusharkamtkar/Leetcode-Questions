@@ -1,20 +1,16 @@
 class Solution {
 public:
     char findTheDifference(string s, string t) {
-        unordered_map<char, int> freq;
-
+        int sumS = 0;
         for(char &ch : s){
-            freq[ch]++;
+            sumS += ch;
         }
 
+        int sumT = 0;
         for(char &ch : t){
-            freq[ch]--;
-
-             if(freq[ch] < 0){
-            return ch;
-        }
+            sumT += ch;
         }
 
-        return 'k';
+        return (char)(sumT - sumS); // sumT is always greater than sumS
     }
 };
