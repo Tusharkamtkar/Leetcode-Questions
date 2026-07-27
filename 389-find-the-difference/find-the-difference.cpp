@@ -1,16 +1,17 @@
 class Solution {
 public:
     char findTheDifference(string s, string t) {
-        int sumS = 0;
-        for(char &ch : s){
-            sumS += ch;
-        }
+        
+        int sum = 0;
 
-        int sumT = 0;
         for(char &ch : t){
-            sumT += ch;
+            sum += ch;
         }
 
-        return (char)(sumT - sumS); // sumT is always greater than sumS
+        for(char &ch : s){
+            sum -= ch;
+        }
+
+        return (char)(sum);
     }
 };
