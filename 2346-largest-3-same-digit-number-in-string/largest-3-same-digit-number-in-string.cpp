@@ -3,17 +3,22 @@ public:
     string largestGoodInteger(string num) {
         int n = num.size();
 
-        char maxChar = ' ';
+        string temp = "";
+        string ans = "";
 
-        for(int i = 2; i < n; i++){
+        for(int i = 0; i < n; i++){
+            int j = i + 1;
+            int k = j + 1;
 
-            if(num[i] == num[i - 1] && num[i] == num[i - 2]){
-                maxChar = max(maxChar, num[i]);
+            if(k < n && num[i] == num[j] && num[j] == num[k]){
+                temp += num[i];
+                temp += num[j];
+                temp += num[k];
+
+                ans = max(ans, temp);
+                temp = "";
             }
         }
-        if(maxChar == ' '){
-            return "";
-        }
-        return string(3, maxChar);
+        return ans;
     }
 };
