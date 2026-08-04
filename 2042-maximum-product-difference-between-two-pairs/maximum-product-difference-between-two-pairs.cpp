@@ -1,14 +1,30 @@
 class Solution {
 public:
     int maxProductDifference(vector<int>& nums) {
-        int n = nums.size();
-
-        sort(nums.begin(), nums.end());
-
-        int product = 0;
-
-        product = (nums[n-1] * nums[n-2]) - (nums[0] * nums[1]);
         
-        return product;
+        int largest = INT_MIN;
+        int secLargest = INT_MIN;
+
+        int smallest = INT_MAX;
+        int secSmallest = INT_MAX;
+
+        for(int num : nums){
+
+            if(num > largest){
+                secLargest = largest;
+                largest = num;
+            }
+            else{
+                secLargest = max(secLargest, num);
+            }
+            if(num < smallest){
+                secSmallest = smallest;
+                smallest = num;
+            }
+            else{
+                secSmallest = min(secSmallest, num);
+            }
+        }
+        return (largest * secLargest) - (smallest * secSmallest);
     }
 };
