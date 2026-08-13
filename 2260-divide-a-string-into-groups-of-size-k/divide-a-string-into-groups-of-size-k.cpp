@@ -1,25 +1,26 @@
 class Solution {
 public:
     vector<string> divideString(string s, int k, char fill) {
-        
+
         int n = s.size();
 
-        vector<string> result;
+        vector<string> str;
 
-        int i = 0;
-        while(i < n){
-            int j = (i + k - 1 >= n) ? n-1 : (i + k -1);
+        for (int i = 0; i < n; i += k) {
+            string sub = s.substr(i, k);
 
-            string temp = s.substr(i, j-i +1);
+            if (sub.size() == k)
+                str.push_back(sub);
 
-            if(j-i+1 < k){
-                int remain = k - (j-i+1);
-                temp += string(remain, fill);
+            else if (sub.size() != 0) {
+                while (sub.size() < k) {
+
+                    sub += fill;
+                }
+                str.push_back(sub);
             }
-
-            result.push_back(temp);
-            i += k;
         }
-        return result;
+
+        return str;
     }
 };
