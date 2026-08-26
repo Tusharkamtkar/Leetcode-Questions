@@ -1,21 +1,26 @@
 class Solution {
 public:
     int numEquivDominoPairs(vector<vector<int>>& dominoes) {
-         
-         vector<int>vec(100);
+        
+        map<string, int> mp;
 
-         int result = 0;
-          
-          for(auto &domino : dominoes){
+        for(auto &domino : dominoes){
             if(domino[0] > domino[1]){
-                swap(domino[0] , domino[1]);
+                swap(domino[0], domino[1]);
             }
 
-            int num = domino[0] * 10 + domino[1];
+            string key = to_string(domino[0]) + to_string(domino[1]);
 
-            result += vec[num]; // freq!
-            vec[num]++;
-          }
-          return result;
+            mp[key]++;
+        }
+
+        int result = 0;
+
+        for(auto &it : mp){
+
+            result += it.second * (it.second - 1) / 2;
+        }
+        return result;
+
     }
 };
