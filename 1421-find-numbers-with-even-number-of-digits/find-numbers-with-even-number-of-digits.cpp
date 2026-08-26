@@ -1,21 +1,18 @@
 class Solution {
 public:
     int findNumbers(vector<int>& nums) {
-
+        
         int count = 0;
 
-        for (auto& num : nums) {
+        for(auto &num : nums){
+            string s = to_string(num);
 
-            int digit = 0;
-
-            while (num) {
-                digit++;
-                num = num / 10;
-            }
-            if(digit % 2 == 0){
-                count++;
-            }
+            int n = s.size();
+        
+        if(n % 2 == 0){
+            count++;
         }
-        return count ;
+        }
+        return count;
     }
 };
