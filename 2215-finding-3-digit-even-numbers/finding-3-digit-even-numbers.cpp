@@ -2,33 +2,38 @@ class Solution {
 public:
     vector<int> findEvenNumbers(vector<int>& digits) {
         
-        int n = digits.size();
+        vector<int> freq(10, 0);
+        vector<int> result;
 
-        unordered_set<int> st;
-
-        for(int i = 0; i < n; i++){
-
-            for(int j = 0; j < n; j++){
-
-                for(int k = 0; k < n; k++){
-
-                    if(i == j || i == k || j == k){
-                        continue;
-                    }
-
-                    int num = (digits[i] * 100) + (digits[j] * 10) + (digits[k] *1);
-
-                    if(num >= 100 && num % 2 == 0){
-                        st.insert(num);
-                    }
-
-                }
-            }
+        for(int &digit : digits){
+            freq[digit]++;
         }
-        vector<int> result(st.begin(), st.end());
 
-        sort(result.begin(), result.end());
+        for(int i = 1; i <= 9; i++){
 
+            if(freq[i] == 0) continue;
+            freq[i]--;
+
+            for(int j = 0; j <= 9; j++){
+
+                if(freq[j] == 0) continue;
+                freq[j]--;
+
+                for(int k = 0; k <= 8; k+=2){ // for even
+
+                    if(freq[k] == 0) continue;
+                    freq[k]--;
+
+                    int num = i * 100 + j * 10 + k;
+
+                    result.push_back(num);
+
+                    freq[k]++;
+                }
+                freq[j]++;
+            }
+            freq[i]++;
+        }
         return result;
     }
 };
