@@ -1,12 +1,13 @@
 class Solution {
 public:
     int findNumbers(vector<int>& nums) {
-        
-        int count = 0;
-        for(auto &num : nums){
-            int digit = floor(log10(num) + 1);
+        int n = nums.size();
 
-            if(digit % 2 == 0){
+        int count = 0;
+
+        for(auto &num : nums){ // followed given Constraints!
+
+            if((num >= 10 && num <= 99) || (num >= 1000 && num <= 9999) || num == 100000){
                 count++;
             }
         }
