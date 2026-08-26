@@ -2,21 +2,26 @@ class Solution {
 public:
     int numEquivDominoPairs(vector<vector<int>>& dominoes) {
         
-        int n = dominoes.size();
-        int count = 0;
+        map<pair<int, int>, int> mp;
 
-        for(int i = 0; i < n; i++){
+        for(auto &domino : dominoes){
 
-            for(int j = i+1; j < n; j++){
-
-                int a = dominoes[i][0], b = dominoes[i][1];
-                int c = dominoes[j][0], d = dominoes[j][1];
-
-                if((a == c && b == d) || (a == d && b == c)){
-                    count++;
-                }
+            if(domino[0] > domino[1]){
+                swap(domino[0], domino[1]);
             }
+
+            mp[{domino[0] , domino[1]}]++;
         }
-        return count;
+
+        int result = 0;
+
+        for(auto it : mp){
+            int freq = it.second;
+
+            result += freq * (freq - 1) / 2; // freqC2!
+        }
+
+        return result;
+
     }
 };
