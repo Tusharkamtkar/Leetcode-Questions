@@ -1,32 +1,25 @@
 class Solution {
 public:
     int countSymmetricIntegers(int low, int high) {
-        
+
         int count = 0;
 
-        for(int num = low; num <= high; num++){
+        for (int num = low; num <= high; num++) {
 
-            string str = to_string(num);
-
-            int len = str.size();
-
-            if(len % 2 != 0){
-                continue;
-            }
-
-            int leftHalfSum = 0;
-            int rightHalfSum = 0;
-
-            for(int i = 0; i < len/2; i++){
-                leftHalfSum += str[i] - '0';
-            }
-
-            for(int i = len/2; i < len; i++){
-                rightHalfSum += str[i] - '0';
-            }
-
-            if(leftHalfSum == rightHalfSum){
+            if (num >= 10 && num <= 99 &&
+                num % 11 == 0) { // all symetric no. of 2 digit nos.
                 count++;
+            } else if (num >= 1000 && num <= 9999) {
+
+                int firstDigit = (num / 1000);
+                int secondDigit = (num / 100) % 10;
+
+                int thirdsDigit = (num / 10) % 10;
+                int fourthDigit = (num / 1) % 10;
+
+                if ((firstDigit + secondDigit) == (thirdsDigit + fourthDigit)) {
+                    count++;
+                }
             }
         }
         return count;
