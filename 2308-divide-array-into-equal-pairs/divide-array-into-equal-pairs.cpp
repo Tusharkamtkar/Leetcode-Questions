@@ -2,17 +2,18 @@ class Solution {
 public:
     bool divideArray(vector<int>& nums) {
         
-        unordered_map<int, int> mp;
+        unordered_set<int> st;
 
         for(auto &no : nums){
-            mp[no]++;
-        }
 
-        for(auto &it : mp){
-            if(it.second % 2 != 0){
-                return false;
+            if(st.count(no)){
+                st.erase(no);
+            }
+            else{
+                st.insert(no);
             }
         }
-        return true;
+        
+        return st.empty();
     }
 };
