@@ -2,20 +2,26 @@ class Solution {
 public:
     int minLength(string s) {
 
-        stack<int> st;
+        int n = s.size();
 
-        for (auto& ch : s) {
+        int i = 0; // for write without any extra space
+        int j = 1;
 
-            if (!st.empty() &&
-             ((ch == 'B' && st.top() == 'A') ||
-                (ch == 'D' && st.top() == 'C'))) {
+        while (j < n) {
 
-                st.pop();
-            }
+            if (i < 0) {
+                i++;
+                s[i] = s[j];
+            } 
+            else if ((s[i] == 'A' && s[j] == 'B') ||
+                    (s[i] == 'C' && s[j] == 'D')){ i--; 
+                    }
             else{
-                st.push(ch);
+                i++;
+                s[i] = s[j];
             }
+            j++;
         }
-        return st.size();
+        return i+1;
     }
 };
