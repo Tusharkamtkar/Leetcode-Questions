@@ -8,16 +8,12 @@ public:
             return {};
         }
 
-        int index = 0;
+        for(int i = 0; i < original.size(); i++){
 
-        for(int i = 0; i < m; i++){
+            int row = i / n;
+            int col = i % n;
 
-            for(int j = 0; j < n; j++){
-
-                result[i][j] = original[index];
-
-                index++;
-            }
+            result[row][col] = original[i];
         }
         return result;
     }
