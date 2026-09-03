@@ -4,33 +4,17 @@ public:
         
         int n = nums.size();
 
-        vector<int> sorted(n);
+        int peak = 0;
 
-        for(int rotation = 0; rotation < n; rotation++){
+        for(int i = 0; i < n; i++){
 
-            int idx = 0;
-
-            for(int i = rotation; i < n; i++){
-                sorted[idx] = nums[i];
-                idx++;
-            }
-
-            for(int i = 0; i < rotation; i++){
-                sorted[idx] = nums[i];
-                idx++;
-            }
-
-        bool isTrue = true;
-        for(int i = 0; i < n-1; i++){
-
-            if(sorted[i] > sorted[i+1]){
-                isTrue = false;
-                break;
+            if(nums[i] > nums[(i+1) % n]){
+                peak++;
             }
         }
-        if(isTrue == true){
+
+        if(peak <= 1){
             return true;
-        }
         }
         return false;
     }
