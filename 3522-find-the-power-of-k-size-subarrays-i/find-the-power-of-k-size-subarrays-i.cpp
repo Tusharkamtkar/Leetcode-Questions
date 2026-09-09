@@ -2,41 +2,33 @@ class Solution {
 public:
     vector<int> resultsArray(vector<int>& nums, int k) {
         
-        int n = nums.size();
+        int n  = nums.size();
 
-        vector<int> result(n-k+1, -1);
+        deque<int> deq;
 
-        int count = 1;
+        vector<int> result;
 
-        for(int i = 1; i < k; i++){
+        for(int i = 0; i < n; i++){
 
-            if(nums[i] == nums[i-1]+1){
-                count++;
-            }
-            else{
-                count = 1;
-            }
-        }
-        if(count == k){
-            result[0] = nums[k-1];
-        }
-
-        int i = 1;
-        int j = k;
-
-        while(j < n){
-            if(nums[j] == nums[j-1]+1){
-                count++;
-            }
-            else{
-                count = 1;
+            if(deq.size() == k){
+                deq.pop_front();
             }
 
-            if(count >= k){
-                result[i] = nums[j];
+            if(!deq.empty() && deq.back() != nums[i]-1){
+                deq.clear();
             }
-            i++;
-            j++;
+
+            deq.push_back(nums[i]);
+
+            if(i >= k-1){
+
+                if(deq.size() == k){
+                    result.push_back(deq.back());
+                }
+                else{
+                    result.push_back(-1);
+                }
+            }
         }
         return result;
     }
