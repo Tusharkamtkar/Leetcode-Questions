@@ -4,18 +4,14 @@ public:
         
         int n = nums.size();
 
-        vector<int> result;
+        int j = 0;
 
         for(int i = 0; i < n; i++){
             if(nums[i] % 2 == 0){
-                result.push_back(nums[i]);
+                swap(nums[i], nums[j]);
+                j++;
             }
         }
-        for(int i = 0; i < n; i++){
-            if(nums[i] % 2 != 0){
-                result.push_back(nums[i]);
-            }
-        }
-        return result;
+        return nums;
     }
 };
