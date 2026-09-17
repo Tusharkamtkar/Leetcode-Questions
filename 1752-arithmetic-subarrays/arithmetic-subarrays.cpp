@@ -3,22 +3,40 @@ public:
 
     bool check(vector<int> &arr){
 
-        sort(arr.begin(), arr.end());
+        int m = arr.size();
 
-        int m  = arr.size();
+        int minEl = INT_MAX;
+        int maxEl = INT_MIN;
 
-        int diff = arr[1] - arr[0];
+        unordered_set<int> st;
 
-        for(int i = 2; i < m; i++){
-            if(arr[i] - arr[i-1] != diff){
+        for(int &num : arr){
+
+            minEl = min(minEl, num);
+            maxEl = max(maxEl, num);
+
+            st.insert(num);
+        }
+
+        if((maxEl - minEl) % (m-1) != 0){
+            return false;
+        }
+
+        int diff = (maxEl - minEl) / (m-1); // common diff.
+
+        int currEl = minEl + diff;
+
+        while(currEl < maxEl){
+
+            if(st.find(currEl) == st.end()){
                 return false;
             }
+            currEl += diff; // Ap = currEl, currEl+diff, currEl + 2diff...
         }
         return true;
     }
 
     vector<bool> checkArithmeticSubarrays(vector<int>& nums, vector<int>& l, vector<int>& r) {
-        
         int n = l.size();
 
         vector<bool> result;
@@ -28,7 +46,7 @@ public:
             int start = l[i];
             int end = r[i];
 
-            vector<int> arr(nums.begin() + start, nums.begin() + end + 1);
+            vector<int>arr(nums.begin() + start, nums.begin() + end + 1);
 
             bool isAp = check(arr);
 
