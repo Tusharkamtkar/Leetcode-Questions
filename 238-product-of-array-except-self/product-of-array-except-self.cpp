@@ -4,33 +4,38 @@ public:
 
         int n = nums.size();
 
-        vector<int> output(n, 1);
+        int zeorsCount = 0;
+        int proWithouZeors = 1;
 
-        int left = 1;
-        int right = 1;
+        vector<int> ans(n);
 
-        for(int i =0; i<n; i++){
-            output[i] = output[i] * left;
-            left = left * nums[i];
+        for (int& num : nums) {
+            if (num == 0) {
+                zeorsCount++;
+            }
+            else{
+                proWithouZeors *= num;
+            }
         }
-        
-        for(int i = n-1; i >= 0; i--){
-            output[i] = output[i] * right;
-            right = right * nums[i];
+
+        for (int i = 0; i < n; i++) {
+
+            int num = nums[i];
+
+            if (num != 0) {
+                if (zeorsCount > 0) {
+                    ans[i] = 0;
+                } else {
+                    ans[i] = proWithouZeors / nums[i];
+                }
+            } else {
+                if (zeorsCount > 1) {
+                    ans[i] = 0;
+                } else {
+                    ans[i] = proWithouZeors;
+                }
+            }
         }
-        return output;
+        return ans;
     }
 };
-//10^8
-
-// 1 1 2 6
-// 24  12  8  6   
-
-// -1 -1 -1 0 0 0
-//  0   0   9  0  0  0
-
-//  l=1
-//  for(i=0->n){
-//     output[i]*=l;
-//     l*=numd[i];
-//  }
