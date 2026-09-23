@@ -8,34 +8,29 @@ public:
         vector<int> ans;
 
         for(int ball = 0; ball < n; ball++){
+            int row = 0;
+            int col = ball;
 
-            int row = 0; // ball always fall from 0th row
-            int col = ball;// ball always fall from same col
-            
-            bool stuck = false;
+            bool stuck = 0;
 
             while(row < m && col < n){
-
                 if(grid[row][col] == 1){
                     if(col == n-1 || grid[row][col+1] == -1){
-                        stuck = true;
+                        stuck = 1;
                         break;
-                    } else{
-                        col++;
                     }
+                    col++;
                 }
                 else{
                     if(col == 0 || grid[row][col-1] == 1){
-                        stuck = true;
+                        stuck = 1;
                         break;
                     }
-                    else{
-                        col--;
-                    }
+                    col--;
                 }
                 row++;
             }
-            if(stuck == true){
+            if(stuck == 1){
                 ans.push_back(-1);
             }
             else{
