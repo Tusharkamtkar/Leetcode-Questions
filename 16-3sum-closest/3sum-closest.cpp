@@ -5,9 +5,9 @@ public:
 
         sort(nums.begin(), nums.end());
 
-        int colsestSum = nums[0] + nums[1] + nums[2];
+        int colsestSum = 100000;
 
-        for(int i = 0; i < n; i++){
+        for(int i = 0; i <= n-3; i++){
 
             int left  = i+1;
             int right = n-1;
@@ -19,10 +19,7 @@ public:
                     colsestSum = sum;
                 }
 
-                if(sum == target){
-                    return sum;
-                }
-                else if(sum < target){
+                if(sum < target){
                     left++;
                 }
                 else{
