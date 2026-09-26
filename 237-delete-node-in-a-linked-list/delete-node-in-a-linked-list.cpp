@@ -9,18 +9,9 @@
 class Solution {
 public:
     void deleteNode(ListNode* node) {
+        
+        node->val = node->next->val; // value assigned to node which should be deleted
 
-        ListNode* prev = NULL;
-
-        while(node != NULL && node->next != NULL){
-
-            node->val = node->next->val;
-
-            prev = node;
-
-            node = node->next;
-        }
-        prev->next = NULL;
-        delete (node);
+        node->next = node->next->next; // just update acc to que. and skip the node which given to delete!
     }
 };
