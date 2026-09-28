@@ -16,20 +16,44 @@ public:
             return head;
         }
 
-        ListNode* odd  = head;
-        ListNode* even = head->next;
-        ListNode* evenHead = head->next;
+        vector<int> arr;
 
-        while(even != NULL && even->next != NULL){
+        ListNode* temp = head;
 
-            odd->next  = odd->next->next;
-            even->next = even->next->next;
+        while(temp != NULL){ // FOR ODD!
+            arr.push_back(temp->val);
 
-            odd  = odd->next; // for moving a step ahead
-            even = even-> next;
+            if(temp->next == NULL){
+                break;
+            }
+
+            temp = temp->next->next;
         }
-        odd->next = evenHead; // joins the odds with even 
 
+        temp = head->next;
+
+        while(temp != NULL){ // FOR EVEN!
+            arr.push_back(temp->val);
+
+            if(temp->next == NULL){
+                break;
+            }
+            
+            temp = temp->next->next;
+        }
+
+        // if(temp){
+        //     arr.push_back(temp->val); // if any element remains at last
+        // }
+
+        temp = head; // assigning the values in LinkedList again
+        int i = 0; // coz we stored elements in arr
+
+        while(temp != NULL){
+            temp->val = arr[i];
+            i++;
+            temp = temp->next;
+        }
         return head;
     }
 };
