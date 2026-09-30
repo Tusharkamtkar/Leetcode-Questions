@@ -4,17 +4,19 @@ public:
         
         int n = nums.size();
 
-        vector<int> missing(n+1, -1);
+        int i = 0;
+        int j = 1;
+
+        int sumOfNums = 0;
 
         for(int i = 0; i < n; i++){
-            missing[nums[i]] = nums[i]; // for insering el in missing
+            sumOfNums += nums[i]; 
         }
 
-        for(int i = 0; i < missing.size(); i++){
-            if(missing[i] == -1){
-                return i;
-            }
-        }
-        return 0;
+        int sumOfNdigits = (n * (n+1)) / 2;
+
+        int ans = sumOfNdigits - sumOfNums;
+
+        return ans;
     }
 };
