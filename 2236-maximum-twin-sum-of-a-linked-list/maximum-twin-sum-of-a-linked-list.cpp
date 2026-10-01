@@ -12,31 +12,35 @@ class Solution {
 public:
     int pairSum(ListNode* head) {
         
+        stack<int> st;
+
         ListNode* temp = head;
 
-        vector<int> arr;
-
         while(temp != NULL){
-            arr.push_back(temp->val);
+            st.push(temp->val);
 
             temp = temp->next;
         }
 
-        int n = arr.size();
+        temp = head;
 
-        int i = 0;
-        int j = n-1;
+        int n = st.size();
+
+        int count = 1;
 
         int result = 0;
 
-        while(i < j){
-            int sum = arr[i] + arr[j];
+        while(count <= n/2){
+
+            int sum = temp->val + st.top();
+
+            count++;
+            temp = temp->next;
+            st.pop();
 
             result = max(result, sum);
-
-            i++;
-            j--;
         }
         return result;
+
     }
 };
