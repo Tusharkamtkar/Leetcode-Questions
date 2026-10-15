@@ -2,25 +2,37 @@ class Solution {
 public:
     vector<string> buildArray(vector<int>& target, int n) {
         
+        stack<string> st;
+
         int stream = 1; // if n =3 stream = {1,2,3}
 
         int i = 0;
 
-        vector<string> result;
-
         while(i < target.size() && stream <= n){
 
-            result.push_back("Push");
+            st.push("Push");
 
-            if(stream == target[i]){
+            if(target[i] == stream){
                 i++;
             }
             else{
-                result.push_back("Pop");
+                st.push("Pop");
             }
-
             stream++;
         }
-        return result;
+
+        vector<string> ans;
+
+        i = 0;
+
+        while(!st.empty()){
+
+            ans.push_back(st.top());
+            st.pop();
+            i++;
+        } 
+        reverse(ans.begin(), ans.end());
+        
+        return ans;
     }
 };
