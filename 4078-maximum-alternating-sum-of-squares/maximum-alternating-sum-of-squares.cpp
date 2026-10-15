@@ -8,14 +8,11 @@ public:
             nums[i] = nums[i] * nums[i];
         }
 
-        sort(nums.begin(), nums.end());
+        nth_element(nums.begin(), nums.begin() + n/2, nums.end());
 
-        long long lowSum  = accumulate(nums.begin(), nums.begin() + n/2, 0LL); // LL is for converting it in long long
-
+        long long lowSum = accumulate(nums.begin(), nums.begin() + n/2, 0LL);
         long long highSum = accumulate(nums.begin() + n/2, nums.end(), 0LL);
 
-        long long ans = highSum - lowSum;
-
-        return ans;
+        return highSum - lowSum;
     }
 };
