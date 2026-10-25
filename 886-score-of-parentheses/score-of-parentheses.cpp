@@ -2,26 +2,26 @@ class Solution {
 public:
     int scoreOfParentheses(string s) {
         
-        int n = s.size();
+        vector<int> vec;// vector as stack
 
-        stack<int> st;
+        int n = s.size();
 
         int score = 0;
 
-        for(int i = 0 ; i < n; i++){
+        for(int i = 0; i < n; i++){
 
             if(s[i] == '('){
-                st.push(score);
+                vec.push_back(score);
                 score = 0;
             }
-            else{ // ')'
-                if(s[i-1] == '('){ // simplest case = '()'
-                    score = st.top() + 1;
+            else{
+                if(s[i-1] == '('){
+                    score = vec.back() + 1;
                 }
-                else{
-                    score = st.top() + (2 * score);
+                else{ // nested case
+                    score = vec.back() + (2 * score);
                 }
-                st.pop();
+                vec.pop_back();
             }
         }
         return score;
