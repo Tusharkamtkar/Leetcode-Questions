@@ -2,22 +2,34 @@ class Solution {
 public:
     int minimumDeletions(string s) {
         
-        stack<char> st;
-
-        int count = 0;
-
         int n = s.size();
 
-        for(int i = 0; i < n; i++){
+        vector<int>  left_b(n, 0);
+        vector<int> right_a(n, 0);
 
-            if(!st.empty() && s[i] == 'a' && st.top() == 'b'){ // ba
-                st.pop();
-                count++;
-            }
-            else{
-                st.push(s[i]);
+        int countb = 0;
+        for(int i = 0; i < n; i++){
+            left_b[i] = countb;
+
+            if(s[i] == 'b'){
+                countb++;
             }
         }
-        return count;
+
+        int counta = 0;
+        for(int i = n-1; i >= 0; i--){
+            right_a[i] = counta;
+
+            if(s[i] == 'a'){
+                counta++;
+            }
+        }
+
+        int minCount = INT_MAX;
+
+        for(int i = 0; i < n; i++){
+            minCount = min(minCount, left_b[i] + right_a[i]);
+        }
+        return minCount;
     }
 };
