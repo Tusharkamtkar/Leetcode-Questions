@@ -2,38 +2,33 @@ class Solution {
 public:
     bool canBeValid(string s, string locked) {
         
-        int n = s.size(); // both size are equal
+        int n = s.size();
 
-        if(n % 2 != 0) return false;
+        if(n % 2 != 0) return false; // odd
 
-        stack<int> open;
-        stack<int> openClose;
+        int open  = 0;
+        int close = 0;
 
-        for(int i = 0; i < n; i++){
-
-            if(locked[i] == '0'){//flexible
-                openClose.push(i);
+        for(int i = 0; i < n; i++){ // Left to Right traversall
+            if(s[i] == '(' || locked[i] == '0'){
+                open++;
             }
-            else if(s[i] == '('){
-                open.push(i);
+            else{
+                open--;
             }
-            else if(s[i] == ')'){
-                if(!open.empty()){
-                    open.pop();
-                }
-                else if(!openClose.empty()){
-                    openClose.pop();
-                }
-                else{
-                    return false;
-                }
-            }
+            if(open < 0) return false;
         }
 
-        while(!open.empty() && !openClose.empty() && open.top() < openClose.top()){
-            open.pop();
-            openClose.pop();
+        for(int i = n-1; i >= 0; i--){ // Right to Left traversall
+            if(s[i] == ')' || locked[i] == '0'){
+                close++;
+            }
+            else{
+                close--;
+            }
+            if(close < 0) return false;
         }
-        return open.empty();
+        
+        return true;
     }
 };
