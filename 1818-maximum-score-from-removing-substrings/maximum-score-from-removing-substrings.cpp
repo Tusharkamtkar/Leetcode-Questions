@@ -1,49 +1,41 @@
 class Solution {
 public:
 
-    string removeSubStr(string &s,string & matchStr){
+    string removeSubStr(string &s, string &matchStr){
+        int i = 0;
 
-        stack<char> st;
+        for(int j = 0; j < s.size(); j++){
+            s[i] = s[j];
+            i++;
 
-        for(char ch : s){
-            if(ch == matchStr[1] && !st.empty() && st.top() == matchStr[0]){
-                st.pop();
-            }
-            else{
-                st.push(ch);
+            if(i >= 2 && s[i-2] == matchStr[0] && s[i-1] == matchStr[1]){
+                i -= 2;
             }
         }
+        s.erase(s.begin() + i, s.end());
 
-        string temp;
-
-        while(!st.empty()){
-            temp.push_back(st.top());
-            st.pop();
-        }
-        reverse(temp.begin(), temp.end());
-
-        return temp;
+        return s;
     }
-     
     int maximumGain(string s, int x, int y) {
         
         int n = s.size();
+
         int score = 0;
 
         string maxStr = (x >= y) ? "ab" : "ba";
         string minStr = (x >= y) ? "ba" : "ab";
 
-        // first Pass
+        // first pass
         string first = removeSubStr(s, maxStr);
         int l = first.size();
 
-        int charRemoved =  (n - l);
+        int charRemoved = ( n -l);
         score += (charRemoved / 2) * max(x, y);
 
-        // second Pass
+        // second pass
         string second = removeSubStr(first, minStr);
+        
         charRemoved = l - second.size();
-
         score += (charRemoved / 2) * min(x, y);
 
         return score;
