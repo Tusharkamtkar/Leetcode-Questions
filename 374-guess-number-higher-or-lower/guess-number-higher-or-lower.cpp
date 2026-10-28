@@ -11,23 +11,22 @@ class Solution {
 public:
     int guessNumber(int n) {
         
-        int left  = 1; 
-        int right = n;
+        int l = 1;
+        int r = n;
 
-        while(left <= right){
+        while(l <= r){
+            int mid = l + (r - l) / 2;
 
-            int guess_no = left + (right - left) / 2;
+            int ans = guess(mid);
 
-            int val = guess(guess_no);
-
-            if(val == 0){
-                return guess_no;
+            if(ans == 0){
+                return mid;
             }
-            else if(val == -1){
-                right = guess_no - 1;
+            else if(ans == 1){
+                l = mid+1;
             }
             else{
-                left = guess_no + 1;
+                r = mid-1;
             }
         }
         return -1;
