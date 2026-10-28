@@ -4,28 +4,33 @@ public:
         
         int n = s.size();
 
-        if(is_sorted(s.begin(), s.end())){
-            return 0;
+        char mini = s[0], maxi = s[0];
+
+        bool isSorted = 1;
+
+        for(int i = 1; i < n; i++){
+
+            if(s[i] < s[i-1]) isSorted = 0;
+
+            mini = min(mini, s[i]);
+            maxi = max(maxi, s[i]);
         }
+
+        if(isSorted) return 0;
 
         if(n == 2){
-            return -1; // we dont sort "ba" coz we have to select substring always
+            return -1;
         }
 
-        char minChar = *min_element(s.begin(), s.end());
-        char maxChar = *max_element(s.begin(), s.end());
-
-        if(s[0] == minChar || s[n-1] == maxChar){
+        if(s.front() == mini || s.back() == maxi){
             return 1;
         }
 
-        char minInMid = *min_element(s.begin() + 1, s.end()-1);
-        char maxInMid = *max_element(s.begin() + 1, s.end());
-
-        if(s[0] > maxInMid && s[n-1] < minInMid){
-            return 3;
+        for(int i = 1; i < n-1; i++){
+            if(s[i] == mini || s[i] == maxi){
+                return 2;
+            }
         }
-
-        return 2;
+        return 3;
     }
 };
