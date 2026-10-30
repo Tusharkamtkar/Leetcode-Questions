@@ -4,26 +4,19 @@ public:
         
         int n = nums.size();
 
-        int i = 0;
+        long long result = 0;
 
-        long long count = 0;
+        int count = 0;
 
-        while(i < n){
-            long long len = 0;
-
+        for(int i = 0; i < n; i++){
             if(nums[i] == 0){
-
-                while(i < n && nums[i] == 0){
-                    i++;
-                    len++;
-                }
+                count++;
             }
             else{
-                i++;
+                count = 0;
             }
-
-            count += (len) * (len + 1) / 2;
+            result = result + count;
         }
-        return count;
+        return result;
     }
 };
