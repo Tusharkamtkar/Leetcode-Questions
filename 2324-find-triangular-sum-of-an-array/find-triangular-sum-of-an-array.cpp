@@ -2,15 +2,13 @@ class Solution {
 public:
     int triangularSum(vector<int>& nums) {
         
-        while(nums.size() > 1){
-            vector<int> newNums;
+        int n = nums.size();
 
-            for(int i = 0; i < nums.size()-1; i++){
-                newNums.push_back((nums[i] + nums[i+1]) % 10);
+        for(int size = n-1; size >= 1; size--){ // size will decrease always
+
+            for(int i = 0; i < size; i++){ // O(n^2) time
+                nums[i] = (nums[i] + nums[i+1]) % 10; // modifying same nums O(1) space
             }
-            // nums = newNums; // these will make an copy always 
-
-            nums = move(newNums);
         }
         return nums[0];
     }
