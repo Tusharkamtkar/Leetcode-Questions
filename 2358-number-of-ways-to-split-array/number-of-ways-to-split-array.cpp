@@ -12,6 +12,7 @@ public:
 
         long long leftSum  = 0;
         long long rightSum = 0;
+
         int split = 0;
 
         for(int i = 0; i < n-1; i++){
@@ -24,6 +25,6 @@ public:
                 split++;
             }
         }
-        return split;
+        return split++;
     }
 };
