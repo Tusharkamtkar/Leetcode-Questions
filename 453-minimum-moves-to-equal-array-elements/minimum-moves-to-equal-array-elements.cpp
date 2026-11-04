@@ -4,15 +4,9 @@ public:
         
         int n = nums.size();
 
-        long long sum = 0;
-        int mini = INT_MAX;
+        long long sum = accumulate(nums.begin(), nums.end(),0LL);
 
-        for(int i = 0; i < n; i++){
-
-            sum += nums[i];
-
-            mini = min(mini, nums[i]);
-        }
+        int mini = *min_element(nums.begin(), nums.end());
 
         return sum - (1LL * n * mini);
     }
