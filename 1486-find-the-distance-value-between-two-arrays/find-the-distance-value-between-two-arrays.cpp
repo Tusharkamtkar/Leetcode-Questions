@@ -13,12 +13,13 @@ public:
 
             for(int j = 0; j < n; j++){
 
-                if(abs(arr1[i] - arr2[j]) <= d){
+                if(abs((arr1[i] - arr2[j])) <= d){
+
                     isValid = false;
                     break;
                 }
             }
-            if(isValid == true){
+            if(isValid){
                 ans++;
             }
         }
