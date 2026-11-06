@@ -4,7 +4,9 @@ public:
         
         int n = s.size();
 
-        map<string, string> mpp;
+        string result = "";
+
+        unordered_map<string, string> mpp;
 
         for(auto &it : knowledge){
             mpp[it[0]] = it[1];
@@ -12,30 +14,21 @@ public:
 
         int i = 0;
 
-        string result = "";
-        string temp = "";
-
-        bool bracketOpened = false;
-
         while(i < n){
             if(s[i] == '('){
-                bracketOpened = true;
-            }
-            else if(s[i] == ')'){
-                bracketOpened = false;
+                int j = s.find(")", i+1); // directly find the () cmplt string indexes
+
+                string temp = s.substr(i+1, j-i-1);
 
                 result += mpp.count(temp) ? mpp[temp] : "?";
 
-                temp = "";
-            }
-            else if(bracketOpened == true){
-                temp.push_back(s[i]);
+                i = j;
             }
             else{
                 result.push_back(s[i]);
             }
             i++;
-        } 
+        }
         return result;
     }
 };
