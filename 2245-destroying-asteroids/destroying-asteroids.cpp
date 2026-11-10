@@ -6,10 +6,10 @@ public:
 
         sort(asteroids.begin(), asteroids.end());
 
-        long long MASS = mass; // coz mass is added by astroid so it may get long
+        long long MASS = mass;
 
         for(int i = 0; i < n; i++){
-            if(asteroids[i] > MASS){
+            if(MASS < asteroids[i]){
                 return false;
             }
             MASS += asteroids[i];
