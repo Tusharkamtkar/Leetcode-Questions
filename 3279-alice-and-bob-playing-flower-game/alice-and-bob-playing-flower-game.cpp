@@ -1,14 +1,16 @@
 class Solution {
 public:
+    typedef long long LL;
+
     long long flowerGame(int n, int m) {
         
-        long long oddN  = (n+1) / 2;
-        long long evenN = n / 2;
+        LL oddN  = ceil(n+1) / 2;
+        LL evenN = floor(n/2);
 
-        long long oddM  = (m+1) / 2;
-        long long evenM = m / 2;
+        LL oddM  = ceil(m+1) / 2;
+        LL evenM = floor(m/2);
 
-        long long ans = (oddN * evenM) + (oddM * evenN);
+        LL ans = (oddN * evenM) + (oddM * evenN);
 
         return ans;
     }
