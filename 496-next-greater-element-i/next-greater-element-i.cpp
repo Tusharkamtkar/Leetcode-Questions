@@ -2,9 +2,9 @@ class Solution {
 public:
     vector<int> nextGreaterElement(vector<int>& nums1, vector<int>& nums2) {
         
-        unordered_map<int, int> mp; // nums2[i] , nge of nums2[i]
+        unordered_map<int, int> mp; // stores nums2[i] and nge of nums2[i]
 
-        stack<int> st;
+        stack<int> st; // for comparing nums2[i]
 
         for(int i = nums2.size()-1; i >= 0; i--){
 
