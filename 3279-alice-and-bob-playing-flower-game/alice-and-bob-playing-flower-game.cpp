@@ -2,10 +2,13 @@ class Solution {
 public:
     long long flowerGame(int n, int m) {
         
-        // using ceil nd floor values
+        long long oddN  = (n+1) / 2;
+        long long evenN = n / 2;
 
-        long long ans = 1LL * (ceil(n/2.0) * floor(m/2.0)) + 
-                        1LL * (ceil(m/2.0) * floor(n/2.0));
+        long long oddM  = (m+1) / 2;
+        long long evenM = m / 2;
+
+        long long ans = (oddN * evenM) + (oddM * evenN);
 
         return ans;
     }
