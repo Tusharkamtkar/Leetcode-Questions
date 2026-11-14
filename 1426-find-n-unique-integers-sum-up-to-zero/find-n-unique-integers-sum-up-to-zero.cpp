@@ -4,20 +4,19 @@ public:
         
         vector<int> ans(n, 0);
 
+        int ele = 1;
+
         int i = 0;
 
-        int element = 1;
+        while(i+1 < n){
 
-        while(i+1 < n){ // for handeling odd nd even cases
+            ans[i] = ele;
+            ans[i+1] = -ele;
 
-            ans[i]  = element;
-            ans[i+1] = - element;
-
-            element++;
+            ele++;
 
             i+=2;
         }
-
         return ans;
     }
 };
