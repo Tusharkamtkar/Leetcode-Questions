@@ -4,18 +4,20 @@ public:
         
         vector<int> ans(n, 0);
 
+        int i = 0;
+        int j = n-1;
+
         int ele = 1;
 
-        int i = 0;
-
-        while(i+1 < n){
-
+        while(i < j){
+            
             ans[i] = ele;
-            ans[i+1] = -ele;
+            ans[j] = -ele;
 
             ele++;
 
-            i+=2;
+            i++;
+            j--;
         }
         return ans;
     }
