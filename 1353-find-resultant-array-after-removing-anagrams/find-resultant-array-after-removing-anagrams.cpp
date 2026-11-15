@@ -1,41 +1,42 @@
 class Solution {
 public:
 
-    bool isAnagram(string s1, string s2){
+    bool checkAnagram(string str1, string str2){
 
-        int arr[26] = {0};
+        int arr1[26] = {0};
+        int arr2[26] = {0};
 
-        for(char ch : s1){
-            arr[ch - 'a']++;
+        for(char &ch : str1){
+            arr1[ch - 'a']++;
         }
-
-        for(char ch : s2){
-            arr[ch - 'a']--;
+        for(char &ch : str2){
+            arr2[ch - 'a']++;
         }
 
         for(int i = 0; i < 26; i++){
-            if(arr[i] != 0){
+            if(arr1[i] != arr2[i]){
                 return false;
             }
         }
         return true;
-    }
 
+
+    }
     vector<string> removeAnagrams(vector<string>& words) {
         
         int n = words.size();
 
-        vector<string> result;
+        vector<string> ans;
 
-        result.push_back(words[0]);
+        ans.push_back(words[0]);
 
-        for(int i = 0; i < n; i++){
+        for(int i = 1; i < n; i++){
 
-            if(!isAnagram(words[i], result.back())){ // accessed both words[i] nd words[i-1]
+            if(!checkAnagram(words[i], ans.back())){ // both words[i], words[i-1]
 
-                result.push_back(words[i]);
+                ans.push_back(words[i]);
             }
         }
-        return result;
+        return ans;
     }
 };
