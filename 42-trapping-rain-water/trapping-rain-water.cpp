@@ -4,33 +4,36 @@ public:
         
         int n = height.size();
 
-        vector<int> prefixMax(n);
-        vector<int> suffixMax(n);
+        int leftMax  = 0;
+        int rightMax = 0;
 
-        prefixMax[0] = height[0];
-
-        for(int i = 1; i < n; i++){
-            
-            prefixMax[i] = max(prefixMax[i-1], height[i]);
-        }
-
-        suffixMax[n-1] = height[n-1];
-
-        for(int i = n-2; i>= 0; i--){
-
-            suffixMax[i] = max(suffixMax[i+1], height[i]);
-        }
+        int left  = 0;
+        int right = n-1;
 
         int total = 0;
 
-        for(int i = 0; i < n; i++){
+        while(left < right){
 
-            int leftMax  = prefixMax[i];
-            int rightMax = suffixMax[i];
+            if(height[left] <= height[right]){
 
-            if(height[i] < leftMax && height[i] < rightMax){
+                if(leftMax > height[left]){
+                    total += leftMax - height[left];
+                }
+                else{
+                    leftMax = height[left];
+                }
 
-                total += min(leftMax, rightMax) - height[i];
+                left++;
+            }
+            else{
+
+                if(rightMax > height[right]){
+                    total += rightMax - height[right];
+                }
+                else{
+                    rightMax = height[right];
+                }
+                right--;
             }
         }
         return total;
