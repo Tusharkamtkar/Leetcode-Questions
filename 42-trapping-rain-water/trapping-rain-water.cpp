@@ -3,27 +3,32 @@ public:
     int trap(vector<int>& height) {
         
         int n = height.size();
-        vector<int>prefixSum(n,0);
-        vector<int>suffixSum(n,0);
-        int total = 0;
-        prefixSum[0] = height[0];
+
+        vector<int> prefixMax(n);
+        vector<int> suffixMax(n);
+
+        prefixMax[0] = height[0];
 
         for(int i = 1; i < n; i++){
-            prefixSum[i] = max(prefixSum[i-1], height[i]);
+            
+            prefixMax[i] = max(prefixMax[i-1], height[i]);
         }
 
-        suffixSum[n-1] = height[n-1];
+        suffixMax[n-1] = height[n-1];
 
-        for(int i = n-2; i >= 0; i--){
-            suffixSum[i] = max(suffixSum[i+1], height[i]);
+        for(int i = n-2; i>= 0; i--){
+
+            suffixMax[i] = max(suffixMax[i+1], height[i]);
         }
 
-        for(int i = 0; i < n-1; i++){
+        int total = 0;
 
-            int leftMax  = prefixSum[i];
-            int rightMax = suffixSum[i];
+        for(int i = 0; i < n; i++){
 
-            if(height[i] < prefixSum[i] && height[i] < suffixSum[i]){
+            int leftMax  = prefixMax[i];
+            int rightMax = suffixMax[i];
+
+            if(height[i] < leftMax && height[i] < rightMax){
 
                 total += min(leftMax, rightMax) - height[i];
             }
