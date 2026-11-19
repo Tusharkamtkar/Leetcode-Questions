@@ -1,9 +1,9 @@
 class Solution {
 public:
     int minimizeSum(vector<int>& nums) {
-
-        int n = nums.size();
         
+        int n = nums.size();
+
         sort(nums.begin(), nums.end());
 
         int case1 = nums[n-1] - nums[2];
