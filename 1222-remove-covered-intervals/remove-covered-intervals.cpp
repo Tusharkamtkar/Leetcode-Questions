@@ -6,7 +6,7 @@ public:
 
         vector<vector<int>> result;
 
-        auto lambda = [](vector<int> vec1, vector<int> vec2){ // insure that first was biggest
+        auto lambda = [](vector<int> &vec1, vector<int> &vec2){
 
             if(vec1[0] == vec2[0]){
                 return vec1[1] > vec2[1];
@@ -17,18 +17,16 @@ public:
 
         sort(intervals.begin(), intervals.end(), lambda);
 
-        result.push_back(intervals[0]); // always the biggest interval
+        result.push_back(intervals[0]);
 
         for(int i = 1; i < n; i++){
 
-            if(result.back()[0] <= intervals[i][0] && result.back()[1] >= intervals[i][1]){
+            if(result.back()[1] >= intervals[i][1]){ // another check is handeled in sorting
                 continue;
             }
 
             result.push_back(intervals[i]);
         }
-
         return result.size();
-
     }
 };
