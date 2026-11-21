@@ -4,29 +4,31 @@ public:
         
         int n = intervals.size();
 
-        vector<vector<int>> result;
+        int lastInterval = 0;
 
-        auto lambda = [](vector<int> &vec1, vector<int> &vec2){
+        int count  = 1; // coz any 1 is always be the biggest range
+
+        auto lambda = [](vector<int> vec1, vector<int> vec2){
 
             if(vec1[0] == vec2[0]){
-                return vec1[1] > vec2[1];
+                return vec1[1] >= vec2[1];
             }
-
-            return vec1[0] < vec2[0];
+            return vec1[0] <= vec2[0];
         };
 
         sort(intervals.begin(), intervals.end(), lambda);
 
-        result.push_back(intervals[0]);
+        lastInterval = intervals[0][1];
 
         for(int i = 1; i < n; i++){
 
-            if(result.back()[1] >= intervals[i][1]){ // another check is handeled in sorting
+            if(lastInterval >= intervals[i][1]){
                 continue;
             }
 
-            result.push_back(intervals[i]);
+            lastInterval = intervals[i][1];
+            count++;
         }
-        return result.size();
+        return count;
     }
 };
