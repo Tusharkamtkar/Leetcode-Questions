@@ -1,19 +1,17 @@
 class Solution {
 public:
-    typedef long long  ll;
-
     long long subArrayRanges(vector<int>& nums) {
         
         int n = nums.size();
 
-        ll sum = 0;
+        long long sum = 0;
 
-        for(int i = 0; i < n; i++){
+        for(int i = 0; i < n ; i++){
 
             int largest  = nums[i];
             int smallest = nums[i];
 
-            for(int j = i+1; j < n; j++){
+            for(int j = i+1; j < n; j++){ // coz single el. never have larger nd smaller
 
                 largest  = max(largest, nums[j]);
                 smallest = min(smallest, nums[j]);
@@ -21,7 +19,6 @@ public:
                 sum = sum + (largest - smallest);
             }
         }
-
         return sum;
     }
 };
