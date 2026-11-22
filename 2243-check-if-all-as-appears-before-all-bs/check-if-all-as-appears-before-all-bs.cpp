@@ -4,12 +4,32 @@ public:
         
         int n = s.size();
 
-        for(int i = 1; i < n; i++){
+        int lastIdxofA  = -1;
+        int firstIdxofB = -1;
 
-            if(s[i-1] == 'b' && s[i] == 'a'){
-                return false;
+        for(int i = 0; i < n; i++){
+
+            if(s[i] == 'a'){
+                lastIdxofA = i;
             }
         }
-        return true;
+
+        for(int i = 0; i < n; i++){
+
+            if(s[i] == 'b'){
+                firstIdxofB = i;
+                break;
+            }
+        }
+
+        if(lastIdxofA < firstIdxofB){
+            return true;
+        }
+
+        if(firstIdxofB == -1 || lastIdxofA == -1){
+            return true;
+        }
+
+        return false;
     }
 };
