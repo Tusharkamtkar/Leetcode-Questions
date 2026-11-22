@@ -2,8 +2,14 @@ class Solution {
 public:
     bool checkString(string s) {
         
-        // finds if there is any string ba is in s
-        
-        return s.find("ba") == string :: npos; 
+        int countof_A = count(s.begin(), s.end(), 'a'); // shortcut for finding an el
+
+        for(int i = 0; i < countof_A; i++){
+
+            if(s[i] != 'a'){
+                return false;
+            }
+        }
+        return true;
     }
 };
