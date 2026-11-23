@@ -8,9 +8,9 @@ public:
 
         int count = 0;
 
-        for(int i = n/3; i < n; i +=2){
+        for(int me = n/3; me < n; me += 2){
 
-            count += piles[i];
+            count += piles[me];
         }
 
         return count;
