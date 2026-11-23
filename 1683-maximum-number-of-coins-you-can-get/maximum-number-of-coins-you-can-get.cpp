@@ -6,21 +6,19 @@ public:
 
         sort(piles.begin(), piles.end());
 
-        int A = n-1;  // Alice
-        int M = n-2; // Me
-        int B = 0;  // Bob
+        int me  = n-2;
+        int bob = 0;  // we dont need bob at all
 
-        int coins = 0;
+        int count = 0;
 
-        while(B < M){
+        while(bob < me){
 
-            coins += piles[M];
+            count += piles[me];
 
-            A -= 2;
-            M -= 2;
-            B += 1;
+            me  -= 2;
+            bob += 1;
         }
 
-        return coins;
+        return count;
     }
 };
