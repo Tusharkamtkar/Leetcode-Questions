@@ -1,25 +1,27 @@
 class Solution {
 public:
     int minDeletions(string s) {
-
+        
         vector<int> freq(26,0);
 
         for(char &ch : s){
-            freq[ch - 'a']++; // for storing indexes
+            freq[ch - 'a']++;
         }
 
-        unordered_set<int> st; // for uniquness
+        sort(freq.begin(), freq.end());
 
         int del_count = 0;
 
-        for(int i = 0; i < 26; i++){
+        for(int i = 24; i >= 0 && freq[i] > 0; i--){
 
-            while(freq[i] > 0 && st.find(freq[i]) != st.end()){
+            if(freq[i] >= freq[i+1]){
 
-                freq[i]--;
-                del_count++;
+                int prev_freq = freq[i];
+
+                freq[i] = max(0, freq[i+1] - 1);
+
+                del_count += (prev_freq - freq[i]);
             }
-            st.insert(freq[i]);
         }
 
         return del_count;
